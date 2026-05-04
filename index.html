@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Final Tap Wins — last to tap takes the pot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/styles.css"/>
+<link rel="stylesheet" href="/css/site.css"/>
+</head>
+<body>
+
+<!-- ─── nav ─────────────────────────────── -->
+<header class="site-nav">
+  <div class="wrap row">
+    <a class="brand" href="#top">
+      <span class="mark">FT</span>
+      <span>FINAL TAP WINS</span>
+    </a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#pulse">Live</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="cta" data-cta="nav">Coming Soon</button>
+  </div>
+</header>
+
+<!-- ─── hero ────────────────────────────── -->
+<section class="hero" id="top">
+  <div class="wrap grid">
+    <div>
+      <div class="site-eyebrow">A Telegram mini-app · TON</div>
+      <h1>One game.<br/>One winner.<br/><span class="ink-soft">Last to tap takes the pot.</span></h1>
+      <p class="lede">Players pay credits to enter a room. Every tap resets a hidden timer. When it runs out, the last person to tap wins 85% of the pot. The exact moment stays secret.</p>
+      <div class="ctas">
+        <button class="primary" data-cta="heroPrimary">Coming Soon</button>
+        <button class="secondary" data-cta="heroSecondary">Coming Soon</button>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <div class="art-eyebrow">FRIDAY SQUAD · 9F·K2T · LIVE</div>
+
+      <div>
+        <div class="art-eyebrow" style="margin-bottom: 8px;">POT</div>
+        <div class="art-pot-row">
+          <span class="art-pot" id="heroPot">1240</span>
+          <span class="art-unit">CR · ≈ 12.40 TON</span>
+        </div>
+        <div class="art-meta" style="margin-top: 6px;">8 PLAYERS · TENSION HOT</div>
+      </div>
+
+      <div class="art-feed">
+        <div class="row"><span>−4.2s</span><span>KADE tapped</span><span>284</span></div>
+        <div class="row"><span>−2.8s</span><span>AIKO tapped</span><span>285</span></div>
+        <div class="row"><span>−1.1s</span><span>MARCO tapped</span><span>286</span></div>
+        <div class="row now"><span>NOW</span><span>YOU could tap</span><span>—</span></div>
+      </div>
+
+      <div class="art-button">TAP</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── live ticker ─────────────────────── -->
+<section class="ticker" aria-hidden="true">
+  <div class="track" id="tickerTrack">
+    <!-- duplicated in JS for seamless loop -->
+  </div>
+</section>
+
+<!-- ─── stats ───────────────────────────── -->
+<section class="stats">
+  <div class="wrap grid">
+    <div class="stat">
+      <div class="label">Paid out</div>
+      <div class="value site-mono" id="statPaid">2 184 050</div>
+      <div class="sub">CR · since launch</div>
+    </div>
+    <div class="stat">
+      <div class="label">Live pot now</div>
+      <div class="value site-mono" id="statLive">3 800</div>
+      <div class="sub">CR · biggest active room</div>
+    </div>
+    <div class="stat">
+      <div class="label">Players online</div>
+      <div class="value site-mono" id="statPlayers">1 247</div>
+      <div class="sub">across 84 rooms</div>
+    </div>
+    <div class="stat">
+      <div class="label">Groups using bot</div>
+      <div class="value site-mono">12 418</div>
+      <div class="sub">in 41 countries</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── how it works ────────────────────── -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="site-eyebrow">How it works</div>
+        <h2>Four steps.<br/>One winner.</h2>
+      </div>
+      <p class="lede">No deck. No cards. No skill curve. Just nerve. The interface tells you how hot it is — but the exact second the timer fires stays a secret.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <div>
+          <h3 class="h">Open a room</h3>
+          <p class="b">Anyone can spin one up from inside Telegram. Pick the entry fee in credits, share the link, friends pay in to join.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <div>
+          <h3 class="h">Pay the entry</h3>
+          <p class="b">Pay once with TON, get the credits in your wallet. Every entry stacks into one pot. Locked when the game starts.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <div>
+          <h3 class="h">Tap to stay alive</h3>
+          <p class="b">Each tap resets a hidden timer. A meter shows the tension — calm, warming, hot, critical — but never the exact countdown.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <div>
+          <h3 class="h">Last tap wins</h3>
+          <p class="b">When the timer fires, whoever tapped most recently wins 85% of the pot. Credits hit the wallet. Cash out to TON anytime.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── live pulse — running rooms ──────── -->
+<section class="pulse" id="pulse">
+  <div class="wrap">
+    <div class="head">
+      <h2>Right now.</h2>
+      <span class="live-tag"><span class="dot"></span>LIVE · UPDATED EVERY SECOND</span>
+    </div>
+
+    <div class="table">
+      <div class="row"><span class="room">9F·K2T</span><span class="label">Friday Squad</span><span class="pot">1240</span><span class="meta">8/20 · CRITICAL</span></div>
+      <div class="row"><span class="room">7H·R8M</span><span class="label">Lunch Pot</span><span class="pot">425</span><span class="meta">5/10 · HOT</span></div>
+      <div class="row"><span class="room">2K·X9P</span><span class="label">Co-workers</span><span class="pot">300</span><span class="meta">12/30 · WARMING</span></div>
+      <div class="row"><span class="room">5G·LN3</span><span class="label">Open Lobby</span><span class="pot">3800</span><span class="meta">38/50 · HOT</span></div>
+      <div class="row"><span class="room">4D·M9X</span><span class="label">Late Night</span><span class="pot">2500</span><span class="meta">5/50 · CALM</span></div>
+      <div class="row"><span class="room">1A·QQ7</span><span class="label">Whale Pot</span><span class="pot">12500</span><span class="meta">5/8 · CRITICAL</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── faq ─────────────────────────────── -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2>Questions.</h2>
+    <div class="list">
+      <details open>
+        <summary>What is a credit? <span class="plus">+</span></summary>
+        <div class="answer">A credit is the in-game unit. 1 TON = 100 credits. The rate is locked, so the pot reads as a clean integer instead of a decimal that swings with the TON price. You can cash out credits to TON from your wallet at any time.</div>
+      </details>
+      <details>
+        <summary>Why hide the timer? <span class="plus">+</span></summary>
+        <div class="answer">If everyone could see the seconds tick down, the game would collapse into a single coordinated tap at zero. The hidden timer is the whole point — you have to read the tension and decide when to commit.</div>
+      </details>
+      <details>
+        <summary>Where does the rest of the pot go? <span class="plus">+</span></summary>
+        <div class="answer">Winner takes 85%. House (the bot) keeps 10% to pay for servers and TON gas. The person who invited the room creator gets 5%. Splits are paid out the moment the timer fires.</div>
+      </details>
+      <details>
+        <summary>Is there a tap cooldown? <span class="plus">+</span></summary>
+        <div class="answer">Yes, one second. Long enough to break a script, short enough to feel responsive. The button shows a thin ring filling back up between taps so you can feel it.</div>
+      </details>
+      <details>
+        <summary>Can I cash out anytime? <span class="plus">+</span></summary>
+        <div class="answer">Yes — credits to TON, sent to your wallet. There's a small network fee and a minimum withdrawal of 100 credits.</div>
+      </details>
+      <details>
+        <summary>Where can I play? <span class="plus">+</span></summary>
+        <div class="answer">Anywhere there's Telegram. Open the bot 1:1 to play in a private room, or invite the bot into any group chat to play with everyone there. Currently in 12 418 groups across 41 countries.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ─── footer cta ──────────────────────── -->
+<section class="foot-cta">
+  <div class="wrap">
+    <h2>Last to tap wins.</h2>
+    <button class="button" data-cta="footer">Coming Soon</button>
+    <div class="meta">@FINALTAPBOT · OPENS THE TG MINI-APP</div>
+  </div>
+</section>
+
+<!-- ─── footer ──────────────────────────── -->
+<footer class="site-foot">
+  <div class="wrap row">
+    <div>© 2026 FINAL TAP WINS · BUILT ON TON</div>
+    <div class="links">
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Press</a>
+      <a href="#">@FinalTapBot</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/js/main.js"></script>
+</body>
+</html>
