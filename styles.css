@@ -1,0 +1,482 @@
+/* Final Tap Wins — design tokens */
+:root {
+  --ink-1: #0e0e0d;
+  --ink-2: #1c1c1a;
+  --ink-3: #353532;
+  --ink-4: #62625f;
+  --ink-5: #8e8e89;
+  --ink-6: #b8b8b3;
+  --paper-1: #fafaf7;
+  --paper-2: #f3f2ec;
+  --paper-3: #e8e6df;
+  --paper-4: #d9d6cd;
+  --line: #1a1a18;
+  --hairline: rgba(20,20,18,0.08);
+  --hairline-strong: rgba(20,20,18,0.16);
+
+  /* one warm accent — used sparingly for "live / active / live winner" */
+  --accent: oklch(0.66 0.17 48);
+  --accent-ink: oklch(0.32 0.10 48);
+  --accent-soft: oklch(0.94 0.04 60);
+
+  --ton: #0098ea;
+
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* phone surface — sized for telegram mini app webview */
+.phone {
+  width: 390px;
+  height: 780px;
+  background: var(--paper-1);
+  color: var(--ink-1);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.35;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+}
+.phone.dark {
+  background: var(--ink-1);
+  color: var(--paper-1);
+}
+
+/* telegram-ish top bar (back + title + close), kept very plain */
+.tg-bar {
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  border-bottom: 1px solid var(--hairline);
+  background: inherit;
+}
+.phone.dark .tg-bar { border-bottom-color: rgba(255,255,255,0.08); }
+.tg-bar .ti {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-3); font-size: 13px;
+}
+.phone.dark .tg-bar .ti { color: var(--ink-6); }
+.tg-bar .tt {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: center;
+  font-weight: 500;
+}
+.phone.dark .tg-bar .tt { color: var(--paper-3); }
+
+.tg-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ── shared atoms ─────────────────────────────────────────── */
+.mono { font-family: var(--font-mono); font-feature-settings: "tnum" 1; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.phone.dark .eyebrow { color: var(--ink-6); }
+.hr { height: 1px; background: var(--hairline); }
+.phone.dark .hr { background: rgba(255,255,255,0.09); }
+
+.kvp {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px;
+}
+.phone.dark .kvp { border-bottom-color: rgba(255,255,255,0.09); }
+.kvp .k { color: var(--ink-4); }
+.phone.dark .kvp .k { color: var(--ink-6); }
+.kvp .v { font-family: var(--font-mono); font-size: 13px; }
+
+.btn {
+  appearance: none;
+  border: none;
+  background: var(--ink-1);
+  color: var(--paper-1);
+  font: 500 14px/1 var(--font-sans);
+  letter-spacing: 0.01em;
+  padding: 16px;
+  border-radius: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+.btn:active { transform: scale(0.995); }
+.btn.ghost { background: transparent; color: var(--ink-1); border: 1px solid var(--hairline-strong); }
+.btn.ton { background: var(--ton); color: #fff; }
+.phone.dark .btn { background: var(--paper-1); color: var(--ink-1); }
+.phone.dark .btn.ghost { background: transparent; color: var(--paper-1); border-color: rgba(255,255,255,0.18); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  background: var(--paper-1);
+}
+.phone.dark .chip { color: var(--paper-3); border-color: rgba(255,255,255,0.18); background: transparent; }
+
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent);
+  animation: livepulse 1.6s ease-out infinite;
+}
+@keyframes livepulse {
+  0% { box-shadow: 0 0 0 0 oklch(0.66 0.17 48 / 0.55); }
+  100% { box-shadow: 0 0 0 8px oklch(0.66 0.17 48 / 0); }
+}
+
+/* segmented input row */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 16px;
+}
+.field label { font-size: 11px; color: var(--ink-4); letter-spacing: 0.02em; }
+.field .input {
+  display: flex; align-items: baseline; gap: 6px;
+  border-bottom: 1px solid var(--ink-1);
+  padding: 6px 0;
+}
+.field .input .val {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+.field .input .unit { font-family: var(--font-mono); font-size: 12px; color: var(--ink-4); }
+
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+.stepper > button {
+  appearance: none; border: 0;
+  background: var(--paper-1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 12px 0;
+  cursor: pointer;
+  color: var(--ink-2);
+}
+.stepper > button.on { background: var(--ink-1); color: var(--paper-1); }
+
+/* tap surface */
+.tap-surface {
+  flex: 1 1 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tap-target {
+  --d: 240px;
+  width: var(--d); height: var(--d);
+  border-radius: 50%;
+  background: var(--paper-1);
+  color: var(--ink-1);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px;
+  transition: transform 0.08s cubic-bezier(.2,.7,.3,1);
+  font-family: var(--font-sans);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04);
+}
+.phone.dark .tap-target { background: var(--paper-1); color: var(--ink-1); }
+.tap-target:active { transform: scale(0.97); }
+.tap-target .tap-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.tap-target .tap-big {
+  font-family: var(--font-mono);
+  font-size: 56px;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-weight: 500;
+}
+
+/* breathing ring around the tap target — intensity is data-driven */
+.tap-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 1px solid oklch(0.66 0.17 48 / var(--ring-a, 0.0));
+  animation: ringbreathe var(--ring-dur, 2.4s) ease-in-out infinite;
+}
+@keyframes ringbreathe {
+  0%,100% { transform: scale(1); opacity: var(--ring-a, 0.0); }
+  50% { transform: scale(1.06); opacity: calc(var(--ring-a, 0.0) * 0.4); }
+}
+
+/* live tap feed */
+.feed {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-6);
+  mask-image: linear-gradient(to top, #000 60%, transparent);
+}
+.feed .row { display: grid; grid-template-columns: 50px 1fr auto; gap: 10px; opacity: 0.85; }
+.feed .row.now { color: var(--accent); opacity: 1; }
+.phone.dark .feed { color: var(--ink-5); }
+
+/* winner spotlight */
+.spotlight {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px;
+  padding: 32px;
+  text-align: center;
+}
+.spotlight .amount {
+  font-family: var(--font-mono);
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+}
+.spotlight .who { font-size: 13px; color: var(--ink-4); }
+.phone.dark .spotlight .who { color: var(--ink-6); }
+
+/* split table */
+.split {
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  margin: 0 16px;
+}
+.phone.dark .split { border-color: rgba(255,255,255,0.09); }
+.split .row {
+  display: grid;
+  grid-template-columns: 14px 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 13px;
+}
+.phone.dark .split .row { border-bottom-color: rgba(255,255,255,0.09); }
+.split .row:last-child { border-bottom: none; }
+.split .row .sw {
+  width: 10px; height: 10px;
+}
+.split .row .who { color: var(--ink-2); }
+.phone.dark .split .row .who { color: var(--paper-2); }
+.split .row .pct { font-family: var(--font-mono); font-size: 11px; color: var(--ink-4); }
+.phone.dark .split .row .pct { color: var(--ink-6); }
+.split .row .amt { font-family: var(--font-mono); font-size: 13px; }
+
+/* roster (small avatars) */
+.roster { display: flex; align-items: center; gap: -8px; }
+.roster .a {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  color: var(--paper-1);
+  font: 600 10px/22px var(--font-mono);
+  text-align: center;
+  border: 2px solid var(--paper-1);
+  margin-left: -6px;
+}
+.roster .a:first-child { margin-left: 0; }
+.phone.dark .roster .a { border-color: var(--ink-1); }
+
+/* meter */
+.meter {
+  height: 2px;
+  background: var(--hairline);
+  position: relative;
+  overflow: hidden;
+}
+.phone.dark .meter { background: rgba(255,255,255,0.10); }
+.meter > i {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  background: var(--ink-1);
+}
+.phone.dark .meter > i { background: var(--paper-1); }
+
+/* heat meter — tension indicator */
+.heat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.heat-track {
+  height: 14px;
+  background: rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.phone:not(.dark) .heat-track {
+  background: var(--paper-2);
+  border: 1px solid var(--hairline-strong);
+}
+
+.heat-fill {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  background: var(--ink-6);
+  transition: width 0.18s ease, background-color 0.4s ease;
+}
+.heat-fill.warming { background: oklch(0.78 0.10 70); }
+.heat-fill.hot { background: oklch(0.7 0.16 55); }
+.heat-fill.critical {
+  background: var(--accent);
+  animation: heatpulse 0.6s ease-in-out infinite alternate;
+}
+@keyframes heatpulse {
+  from { box-shadow: 0 0 0 0 oklch(0.66 0.17 48 / 0.0); filter: brightness(1); }
+  to   { box-shadow: 0 0 6px 0 oklch(0.66 0.17 48 / 0.6); filter: brightness(1.18); }
+}
+.heat-label {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  margin-bottom: 2px;
+}
+.heat-label .phase { margin-left: 24px; }
+.heat-label .phase { color: var(--ink-4); }
+.heat-label .phase.warming { color: oklch(0.62 0.12 70); }
+.heat-label .phase.hot { color: oklch(0.6 0.18 55); }
+.heat-label .phase.critical { color: var(--accent); }
+.phone.dark .heat-label .phase { color: var(--ink-6); }
+.phone.dark .heat-label .phase.warming { color: oklch(0.78 0.12 70); }
+.phone.dark .heat-label .phase.hot { color: oklch(0.74 0.18 55); }
+
+/* tap cooldown sweep — drawn as a clipped circle around the button */
+.tap-cooldown {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(var(--accent) calc(var(--cd) * 1%), transparent 0);
+  -webkit-mask: radial-gradient(circle, transparent calc(50% - 1px), #000 calc(50% - 1px), #000 50%, transparent 50%);
+  mask: radial-gradient(circle, transparent calc(50% - 1px), #000 calc(50% - 1px), #000 50%, transparent 50%);
+  opacity: 0.85;
+}
+
+/* heat halo overlay on dark screens — subtle ambient warmth */
+.heat-halo {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, oklch(0.66 0.17 48 / var(--ha, 0)) 0%, transparent 60%);
+  transition: --ha 0.4s ease;
+}
+
+/* help glyph — monospace ? in a hairline circle, matches Rams data-readout language */
+.icon-btn {
+  appearance: none;
+  border: 1px solid currentColor;
+  background: transparent;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  cursor: pointer;
+  color: inherit;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0;
+  opacity: 0.55;
+  transition: opacity 0.12s ease, background 0.12s ease;
+}
+.icon-btn:hover { opacity: 1; background: rgba(255,255,255,0.06); }
+.phone:not(.dark) .icon-btn:hover { background: rgba(0,0,0,0.04); }
+
+/* rules screen */
+.rule-row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--hairline);
+  align-items: flex-start;
+}
+.rule-row .n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.08em;
+  padding-top: 2px;
+}
+.rule-row .h {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.rule-row .b {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin-top: 4px;
+  line-height: 1.45;
+}
+
+/* speech bubble for telegram preview */
+.tg-msg {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 86%;
+}
+
+/* the labelled flow — applies a clean numeric callout above artboards */
+.flow-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: rgba(60,50,40,0.55);
+  text-transform: uppercase;
+}
